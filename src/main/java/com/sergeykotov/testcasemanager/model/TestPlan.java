@@ -7,21 +7,21 @@ public final class TestPlan {
     private Story story;
     private Group group;
     private int num;
-    private boolean regression;
+    private TestPlanType testPlanType;
 
-    public TestPlan(Story story, Group group, int num, boolean regression) {
+    public TestPlan(Story story, Group group, int num, TestPlanType testPlanType) {
         this.story = story;
         this.group = group;
         this.num = num;
-        this.regression = regression;
+        this.testPlanType = testPlanType;
     }
 
-    public TestPlan(Long id, Story story, Group group, int num, boolean regression) {
+    public TestPlan(Long id, Story story, Group group, int num, TestPlanType testPlanType) {
         this.id = id;
         this.story = story;
         this.group = group;
         this.num = num;
-        this.regression = regression;
+        this.testPlanType = testPlanType;
     }
 
     public Long getId() {
@@ -52,12 +52,12 @@ public final class TestPlan {
         this.num = num;
     }
 
-    public boolean isRegression() {
-        return regression;
+    public TestPlanType getTestPlanType() {
+        return testPlanType;
     }
 
-    public void setRegression(boolean regression) {
-        this.regression = regression;
+    public void setTestPlanType(TestPlanType testPlanType) {
+        this.testPlanType = testPlanType;
     }
 
     @Override
@@ -75,6 +75,6 @@ public final class TestPlan {
 
     @Override
     public String toString() {
-        return story + " " + group;
+        return story + " " + group + " " + testPlanType;
     }
 }

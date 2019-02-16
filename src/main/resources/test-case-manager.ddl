@@ -5,12 +5,6 @@ CREATE TABLE build (
     UNIQUE (module_id, version)
 );
 
-CREATE TABLE grp (
-    id        INTEGER PRIMARY KEY,
-    name      TEXT    NOT NULL UNIQUE,
-    module_id INTEGER REFERENCES module (id) ON DELETE CASCADE NOT NULL
-);
-
 CREATE TABLE grp_test_case (
     id           INTEGER PRIMARY KEY,
     grp_id       INTEGER REFERENCES grp (id) ON DELETE CASCADE NOT NULL,
@@ -47,16 +41,28 @@ CREATE TABLE test_case (
     name TEXT    NOT NULL UNIQUE
 );
 
-CREATE TABLE test_plan (
-    id         INTEGER PRIMARY KEY,
-    story_id   INTEGER NOT NULL REFERENCES story (id) ON DELETE CASCADE,
-    grp_id     INTEGER NOT NULL REFERENCES grp (id) ON DELETE CASCADE,
-    num        INTEGER NOT NULL,
-    regression BOOLEAN NOT NULL,
-    UNIQUE (story_id, grp_id)
-);
-
 CREATE TABLE tester (
     id   INTEGER PRIMARY KEY,
     name TEXT    NOT NULL UNIQUE
+);
+
+CREATE TABLE grp (
+    id        INTEGER PRIMARY KEY,
+    name      TEXT    NOT NULL UNIQUE,
+    module_id INTEGER REFERENCES module (id) ON DELETE CASCADE NOT NULL,
+    priority  INTEGER NOT NULL
+);
+
+CREATE TABLE test_plan (
+    id       INTEGER PRIMARY KEY,
+    story_id INTEGER NOT NULL REFERENCES story (id) ON DELETE CASCADE,
+    grp_id   INTEGER NOT NULL REFERENCES grp (id) ON DELETE CASCADE,
+    num      INTEGER NOT NULL,
+    type_id  INTEGER NOT NULL REFERENCES test_plan_type (id) ON DELETE CASCADE,
+    UNIQUE (story_id, grp_id)
+);
+
+CREATE TABLE test_plan_type (
+    id   INTEGER PRIMARY KEY,
+    name TEXT    UNIQUE NOT NULL
 );

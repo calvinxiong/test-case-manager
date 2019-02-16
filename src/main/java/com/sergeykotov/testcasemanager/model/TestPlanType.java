@@ -2,35 +2,21 @@ package com.sergeykotov.testcasemanager.model;
 
 import java.util.Objects;
 
-public final class Group {
+public class TestPlanType {
     private Long id;
-    private Module module;
     private String name;
-    private int priority;
 
-    public Group(Module module, String name, int priority) {
-        this.module = module;
+    public TestPlanType(String name) {
         this.name = name;
-        this.priority = priority;
     }
 
-    public Group(Long id, Module module, String name, int priority) {
+    public TestPlanType(Long id, String name) {
         this.id = id;
-        this.module = module;
         this.name = name;
-        this.priority = priority;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public Module getModule() {
-        return module;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
     }
 
     public String getName() {
@@ -41,20 +27,12 @@ public final class Group {
         this.name = name;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Group group = (Group) o;
-        return Objects.equals(group.name, name);
+        TestPlanType that = (TestPlanType) o;
+        return Objects.equals(name, that.name);
     }
 
     @Override
