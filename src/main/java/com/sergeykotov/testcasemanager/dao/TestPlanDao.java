@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestPlanDao {
+public final class TestPlanDao {
     private static final String URL = "jdbc:sqlite:src/main/resources/test-case-manager.sqlite3";
     private static final String GET_ALL_CMD = "select t.id, t.story_id, t.grp_id, t.num, t.type_id from test_plan t order by t.story_id, t.grp_id, t.num;";
     private static final String GET_CMD = "select t.story_id, t.grp_id, t.num, t.type_id from test_plan t where t.id = ?;";
